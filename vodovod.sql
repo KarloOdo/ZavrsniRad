@@ -16,7 +16,8 @@ create table racun(
     datum datetime,
     poziv_na_broj varchar(80),
     status varchar(50),
-    napomena varchar(500)
+    napomena varchar(500),
+    korisnik varchar(50)
 );
 
 create table usluga(
@@ -30,9 +31,12 @@ create table stavke_racuna(
     oznaka int not null primary key auto_increment,
     redni_broj int,
     kolicina decimal(17,2),
-    cijena decimal(17,2)
+    cijena decimal(17,2),
+    racun varchar(50),
+    usluga varchar(50)
 );
 
 alter table korisnik add foreign key (sifra) references racun(sifra);
+alter table korisnik add foreign key (sifra) references usluga(sifra);
 alter table racun add foreign key (sifra) references stavke_racuna(oznaka);
 alter table usluga add foreign key (sifra) references stavke_racuna(oznaka);
